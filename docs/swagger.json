@@ -1,0 +1,81 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Janauber API",
+    "description": "API for Managing janauber"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {},
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/user/": {
+      "get": {
+        "summary": "POST user",
+        "description": "This endpoint is responsible to get ALL users.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "John Doe"
+        },
+        "phone": {
+          "type": "string",
+          "example": "40028922"
+        }
+      },
+      "required": [
+        "name",
+        "phone"
+      ],
+      "xml": {
+        "name": "User"
+      }
+    }
+  }
+}
