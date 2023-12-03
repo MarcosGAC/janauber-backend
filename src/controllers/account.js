@@ -14,7 +14,7 @@ router.post("/login", async (req, res) => {
   console.log("data ->", data);
 
   if (error) return res.status(400).json(error);
-  return res.json(users);
+  return res.json(data);
 });
 
 export default router;

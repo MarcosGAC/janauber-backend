@@ -15,10 +15,20 @@
     "application/json"
   ],
   "paths": {
-    "/user/": {
+    "/passenger/{id}": {
       "get": {
         "summary": "POST user",
         "description": "This endpoint is responsible to get ALL users.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -27,7 +37,9 @@
             "description": "Bad Request"
           }
         }
-      },
+      }
+    },
+    "/passenger/": {
       "post": {
         "summary": "POST user",
         "description": "This endpoint is responsible to create a new user.",
@@ -48,15 +60,23 @@
                   "name": {
                     "example": "any"
                   },
-                  "phone": {
+                  "email": {
+                    "example": "any"
+                  },
+                  "password": {
+                    "example": "any"
+                  },
+                  "cpf": {
+                    "example": "any"
+                  },
+                  "birthday": {
                     "example": "any"
                   }
                 }
               }
             }
           }
-        },
-        "autoBody": true
+        }
       }
     }
   },

@@ -21,8 +21,8 @@ const doc = {
   }, // by default: empty object (Swagger 2.0)
 };
 
-const outputFile = "./dist/docs/swagger.json";
-const endpointsFiles = ["./dist/app.js"];
+const outputFile = "./swagger.json";
+const endpointsFiles = ["../app.js"];
 
 /* NOTE: if you use the express Router, you must pass in the 
    'endpointsFiles' only the root file where the route starts,
