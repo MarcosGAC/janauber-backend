@@ -1,39 +1,32 @@
 import express from "express";
-
-import { db } from "../../db.js";
+import { Passenger } from "../models/passenger.js";
 
 const router = express.Router();
+const passenger = new Passenger();
 
-router.get("/", async (req, res) => {
+router.get("/:id", async (req, res) => {
   /*  
   #swagger.summary = 'POST user'
   #swagger.description = 'This endpoint is responsible to get ALL users.'
   */
-  const { data, error } = await db.from("user").select();
-
+  const { data, error } = await passenger.findOneByEmail(req.params.id);
   if (error) return res.status(400).json(error);
-
   return res.json(data);
 });
 
 router.post("/", async (req, res) => {
   /*  
-  #swagger.autoBody= true
   #swagger.summary = 'POST user'
   #swagger.description = 'This endpoint is responsible to create a new user.'
-  #swagger.parameters['obj'] = {
-        in: 'body,
-        description: "Create an user",
-        required: 'true',
-        schema: { $ref: '#/definitions/User' }
   */
-  const { name, phone } = req.body;
-
-  const { data, error } = await db
-    .from("user")
-    .insert({ name, phone })
-    .select()
-    .limit(1);
+  const { name, email, password, cpf, birthday } = req.body;
+  const { data, error } = await passenger.createOne({
+    name,
+    email,
+    password,
+    cpf,
+    birthday,
+  });
 
   if (error) return res.status(400).json(error);
 

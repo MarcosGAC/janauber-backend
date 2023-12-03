@@ -21,12 +21,12 @@ const doc = {
   }, // by default: empty object (Swagger 2.0)
 };
 
-const outputFile = "./docs/swagger.json";
-const endpointsFiles = ["./index.js"];
+const outputFile = "./dist/docs/swagger.json";
+const endpointsFiles = ["./dist/app.js"];
 
 /* NOTE: if you use the express Router, you must pass in the 
    'endpointsFiles' only the root file where the route starts,
    such as: index.js, app.js, routes.js, ... */
 swaggerAutogen(options)(outputFile, endpointsFiles, doc).then(async () => {
-  await import("../index.js"); // Your project's root file
+  await import("../app.js"); // Your project's root file
 });

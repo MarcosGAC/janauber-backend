@@ -29,7 +29,8 @@
         }
       },
       "post": {
-        "description": "",
+        "summary": "POST user",
+        "description": "This endpoint is responsible to create a new user.",
         "responses": {
           "200": {
             "description": "OK"
@@ -39,20 +40,23 @@
           }
         },
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "phone": {
+                    "example": "any"
+                  }
+                }
               }
             }
           }
-        }
+        },
+        "autoBody": true
       }
     }
   },
@@ -72,10 +76,7 @@
       "required": [
         "name",
         "phone"
-      ],
-      "xml": {
-        "name": "User"
-      }
+      ]
     }
   }
 }
