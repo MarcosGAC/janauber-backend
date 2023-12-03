@@ -2,25 +2,40 @@ import express from "express";
 import { Passenger } from "../models/passenger.js";
 
 const router = express.Router();
-const passenger = new Passenger();
+const passengerModel = new Passenger();
 
 router.get("/:id", async (req, res) => {
   /*  
-  #swagger.summary = 'POST user'
+  #swagger.summary = 'GET one user'
+  #swagger.description = 'This endpoint is responsible to get ONE users.'
+  */
+  const { passenger, error } = await passengerModel.findOneById(req.params.id);
+  if (error) return res.status(400).json(error);
+  return res.json(passenger);
+});
+
+router.get("/", async (req, res) => {
+  /*  
+  #swagger.summary = 'GET users'
   #swagger.description = 'This endpoint is responsible to get ALL users.'
   */
-  const { data, error } = await passenger.findOneByEmail(req.params.id);
+  const { passenger, error } = await passengerModel.getAll();
   if (error) return res.status(400).json(error);
-  return res.json(data);
+  return res.json(passenger);
 });
 
 router.post("/", async (req, res) => {
   /*  
   #swagger.summary = 'POST user'
   #swagger.description = 'This endpoint is responsible to create a new user.'
+  #swagger.autoBody = true
+  #swagger.parameters['passenger'] = {
+            in: 'body',
+            description: 'Create New Passenger',
+    } 
   */
   const { name, email, password, cpf, birthday } = req.body;
-  const { data, error } = await passenger.createOne({
+  const { passenger, error } = await passengerModel.create({
     name,
     email,
     password,
@@ -30,7 +45,7 @@ router.post("/", async (req, res) => {
 
   if (error) return res.status(400).json(error);
 
-  return res.json(data);
+  return res.json(passenger);
 });
 
 export default router;

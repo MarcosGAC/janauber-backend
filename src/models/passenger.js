@@ -3,9 +3,11 @@ import { db } from "../db.js";
 export class Passenger {
   /**
    * get all passengers
+   * @return {Promise<Object>} Passenger
    */
   async getAll() {
-    return await db.from("passenger").select();
+    const { data: passenger, error } = await db.from("passenger").select();
+    return { passenger, error };
   }
 
   /**
@@ -18,14 +20,23 @@ export class Passenger {
    * @param {string} passenger.birthday
    */
   async create(passenger) {
-    return await db.from("passenger").insert(passenger).select().limit(1);
+    const { data = [passenger], error } = await db
+      .from("passenger")
+      .insert(passenger)
+      .select()
+      .limit(1);
+    return { passenger, error };
   }
   /**
    * Find a passenger by Id
    * @param {string} id
    */
   async findOneById(id) {
-    return await db.from("passenger").select().eq("id", id);
+    const {
+      data: [passenger],
+      error,
+    } = await db.from("passenger").select().eq("id", id);
+    return { passenger, error };
   }
 
   /**
@@ -33,11 +44,14 @@ export class Passenger {
    * @param {string} email
    */
   async findOneByEmail(email) {
-    const { data, error } = await db
+    const {
+      data: [passenger],
+      error,
+    } = await db
       .from("passenger")
       .select()
       .ilike("email", `%${email}%`)
       .limit(1);
-    return { data, error };
+    return { passenger, error };
   }
 }

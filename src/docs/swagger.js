@@ -3,6 +3,7 @@ import swaggerAutogen from "swagger-autogen";
 const options = {
   openapi: "OpenAPI 3", // Enable/Disable OpenAPI. By default is null
   language: "en-US", // Change response language. By default is 'en-US'
+  autoBody: true,
 };
 
 const doc = {
@@ -16,9 +17,6 @@ const doc = {
   schemes: ["http"], // by default: ['http']
   consumes: ["application/json"], // by default: ['application/json']
   securityDefinitions: {}, // by default: empty object
-  definitions: {
-    User: { $name: "John Doe", $phone: "40028922" },
-  }, // by default: empty object (Swagger 2.0)
 };
 
 const outputFile = "./swagger.json";

@@ -17,8 +17,8 @@
   "paths": {
     "/passenger/{id}": {
       "get": {
-        "summary": "POST user",
-        "description": "This endpoint is responsible to get ALL users.",
+        "summary": "GET one user",
+        "description": "This endpoint is responsible to get ONE users.",
         "parameters": [
           {
             "name": "id",
@@ -40,9 +40,48 @@
       }
     },
     "/passenger/": {
+      "get": {
+        "summary": "GET users",
+        "description": "This endpoint is responsible to get ALL users.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
       "post": {
         "summary": "POST user",
         "description": "This endpoint is responsible to create a new user.",
+        "parameters": [
+          {
+            "name": "passenger",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "cpf": {
+                  "example": "any"
+                },
+                "birthday": {
+                  "example": "any"
+                }
+              }
+            },
+            "description": "Create New Passenger"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -76,27 +115,9 @@
               }
             }
           }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "User": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "John Doe"
         },
-        "phone": {
-          "type": "string",
-          "example": "40028922"
-        }
-      },
-      "required": [
-        "name",
-        "phone"
-      ]
+        "autoBody": true
+      }
     }
   }
 }
