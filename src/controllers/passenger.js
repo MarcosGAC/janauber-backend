@@ -8,6 +8,9 @@ router.get("/:id", async (req, res) => {
   /*  
   #swagger.summary = 'GET one user'
   #swagger.description = 'This endpoint is responsible to get ONE users.'
+  #swagger.security = [{
+    "apiKeyAuth": []
+  }]
   */
   const { passenger, error } = await passengerModel.findOneById(req.params.id);
   if (error) return res.status(400).json(error);
@@ -18,6 +21,9 @@ router.get("/", async (req, res) => {
   /*  
   #swagger.summary = 'GET users'
   #swagger.description = 'This endpoint is responsible to get ALL users.'
+  #swagger.security = [{
+    "apiKeyAuth": []
+  }]
   */
   const { passenger, error } = await passengerModel.getAll();
   if (error) return res.status(400).json(error);
@@ -32,7 +38,10 @@ router.post("/", async (req, res) => {
   #swagger.parameters['passenger'] = {
             in: 'body',
             description: 'Create New Passenger',
-    } 
+    }
+  #swagger.security = [{
+    "apiKeyAuth": []
+  }] 
   */
   const { name, email, password, cpf, birthday } = req.body;
   const { passenger, error } = await passengerModel.create({

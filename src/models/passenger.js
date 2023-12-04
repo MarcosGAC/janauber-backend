@@ -27,6 +27,7 @@ export class Passenger {
       .limit(1);
     return { passenger, error };
   }
+
   /**
    * Find a passenger by Id
    * @param {string} id
@@ -53,5 +54,19 @@ export class Passenger {
       .ilike("email", `%${email}%`)
       .limit(1);
     return { passenger, error };
+  }
+
+  /**
+   * Chack if passenger exists by Email
+   * @param {string} email
+   */
+  async existsByEmail(email) {
+    const { error, count } = await db
+      .from("passenger")
+      .select("*", { count: "exact" })
+      .ilike("email", `%${email}%`);
+
+    const exists = count > 0;
+    return { exists, error };
   }
 }

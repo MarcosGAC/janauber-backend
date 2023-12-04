@@ -16,7 +16,14 @@ const doc = {
   basePath: "/", // by default: '/'
   schemes: ["http"], // by default: ['http']
   consumes: ["application/json"], // by default: ['application/json']
-  securityDefinitions: {}, // by default: empty object
+  securityDefinitions: {
+    apiKeyAuth: {
+      type: "apiKey",
+      in: "header", // can be 'header', 'query' or 'cookie'
+      name: "API-KEY", // name of the header, query parameter or cookie
+      description: "API JWT token",
+    },
+  }, // by default: empty object
 };
 
 const outputFile = "./swagger.json";
