@@ -1,10 +1,12 @@
 import express from "express";
 import { Auth } from "../auth/auth.js";
 import { Passenger } from "../models/passenger.js";
+import { Driver } from "../models/driver.js";
 
 const router = express.Router();
-const passengerModel = new Passenger();
 const auth = new Auth();
+const passengerModel = new Passenger();
+const driverModel = new Driver();
 
 router.post("/login", async (req, res) => {
   /*  
@@ -18,9 +20,14 @@ router.post("/login", async (req, res) => {
   */
   const { email, password } = req.body; // encrypt password and use JWT
 
-  const { passenger, error } = await passengerModel.findOneByEmail(email);
+  if (!password || !email)
+    return res.status(400).json({ message: "Password or Email is missing" });
+
+  const { passenger } = await passengerModel.findOneByEmail(email);
+  const { driver } = await driverModel.findOneByEmail(email);
   // TODO: add login for driver
-  const isValidPassword = password === passenger.password;
+  const isValidPassword =
+    password === passenger?.password || driver?.password === password;
 
   if (!isValidPassword) {
     return res.status(401).send();
@@ -28,12 +35,15 @@ router.post("/login", async (req, res) => {
 
   const token = auth.encode({ email });
 
-  if (error) return res.status(400).json(error);
+  delete passenger?.password;
+  delete driver?.password;
   return res.json({
     token,
+    passenger,
+    driver,
   });
 });
-// TODO: register for driver
+
 router.post("/register/passenger", async (req, res) => {
   /*  
   #swagger.summary = 'POST Register Passenger'
@@ -59,6 +69,48 @@ router.post("/register/passenger", async (req, res) => {
   return res.json({
     token,
     passenger,
+  });
+});
+
+router.post("/register/driver", async (req, res) => {
+  /*  
+  #swagger.summary = 'POST Register Driver'
+  #swagger.description = 'This endpoint is responsible to register a new Driver.'
+  #swagger.parameters['register'] = {
+    in: 'body',
+    description: 'Register a New Driver',
+  } 
+  #swagger.security = []
+  */
+  const {
+    name,
+    email,
+    password,
+    cpf,
+    birthday,
+    capacity,
+    color,
+    plate,
+    model,
+  } = req.body;
+  const { driver, error } = await driverModel.create({
+    name,
+    email,
+    password,
+    cpf,
+    birthday,
+    capacity,
+    color,
+    plate,
+    model,
+  });
+
+  if (error) return res.status(400).json(error);
+
+  const token = auth.encode({ email });
+  return res.json({
+    token,
+    driver,
   });
 });
 

@@ -37,7 +37,6 @@ export class Passenger {
       data: [passenger],
       error,
     } = await db.from("passenger").select().eq("id", id);
-    console.log("passenger ->", passenger);
     return { passenger, error };
   }
 
@@ -54,7 +53,6 @@ export class Passenger {
       .select()
       .ilike("email", `%${email}%`)
       .limit(1);
-      console.log("passenger ->", passenger);
     return { passenger, error };
   }
 

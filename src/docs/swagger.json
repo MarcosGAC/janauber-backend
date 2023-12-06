@@ -42,9 +42,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -64,9 +61,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -111,9 +105,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -240,9 +231,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [],
@@ -274,6 +262,98 @@
         }
       }
     },
+    "/account/register/driver": {
+      "post": {
+        "summary": "POST Register Driver",
+        "description": "This endpoint is responsible to register a new Driver.",
+        "parameters": [
+          {
+            "name": "register",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "cpf": {
+                  "example": "any"
+                },
+                "birthday": {
+                  "example": "any"
+                },
+                "capacity": {
+                  "example": "any"
+                },
+                "color": {
+                  "example": "any"
+                },
+                "plate": {
+                  "example": "any"
+                },
+                "model": {
+                  "example": "any"
+                }
+              }
+            },
+            "description": "Register a New Driver"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "email": {
+                    "example": "any"
+                  },
+                  "password": {
+                    "example": "any"
+                  },
+                  "cpf": {
+                    "example": "any"
+                  },
+                  "birthday": {
+                    "example": "any"
+                  },
+                  "capacity": {
+                    "example": "any"
+                  },
+                  "color": {
+                    "example": "any"
+                  },
+                  "plate": {
+                    "example": "any"
+                  },
+                  "model": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/driver/{id}": {
       "get": {
         "summary": "GET one driver",
@@ -294,9 +374,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -316,9 +393,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -351,6 +425,18 @@
                 },
                 "birthday": {
                   "example": "any"
+                },
+                "capacity": {
+                  "example": "any"
+                },
+                "color": {
+                  "example": "any"
+                },
+                "plate": {
+                  "example": "any"
+                },
+                "model": {
+                  "example": "any"
                 }
               }
             },
@@ -363,9 +449,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -392,6 +475,18 @@
                     "example": "any"
                   },
                   "birthday": {
+                    "example": "any"
+                  },
+                  "capacity": {
+                    "example": "any"
+                  },
+                  "color": {
+                    "example": "any"
+                  },
+                  "plate": {
+                    "example": "any"
+                  },
+                  "model": {
                     "example": "any"
                   }
                 }

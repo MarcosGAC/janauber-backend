@@ -26,7 +26,7 @@ export class Driver {
       .insert(driver)
       .select()
       .limit(1);
-    return { error };
+    return { driver, error };
   }
 
   /**
@@ -53,7 +53,7 @@ export class Driver {
     const {
       data: [driver],
       error,
-    } = db.from("driver").select().ilike("email", `%${email}%`).limit(1);
+    } = await db.from("driver").select().ilike("email", `%${email}%`).limit(1);
     return { driver, error };
   }
 }
