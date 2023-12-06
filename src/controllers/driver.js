@@ -42,13 +42,27 @@ router.post("/", async (req, res) => {
         "apiKeyAuth": []
       }] 
      */
-  const { name, email, password, cpf, birthday } = req.body;
+  const {
+    name,
+    email,
+    password,
+    cpf,
+    birthday,
+    capacity,
+    color,
+    plate,
+    model,
+  } = req.body;
   const { driver, error } = await driverModel.create({
     name,
     email,
     password,
     cpf,
     birthday,
+    capacity,
+    color,
+    plate,
+    model,
   });
 
   if (error) return res.status(400).json(error);

@@ -9,13 +9,14 @@ import swaggerDocument from "./docs/swagger.json";
 
 export const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use("/passenger", privateRoute, passenger);
+app.use("/passenger",  passenger);
 app.use("/account", account);
-app.use("/driver", privateRoute, driver);
+app.use("/driver",driver);
 
 // Errors request - Put in a middleware
 app.use((req, res, next) => {
