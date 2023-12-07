@@ -496,6 +496,155 @@
         },
         "autoBody": true
       }
+    },
+    "/travel/{id}": {
+      "get": {
+        "summary": "GET one travel",
+        "description": "This endpoint is responsible to get ONE travel.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/travel/": {
+      "get": {
+        "summary": "GET travels",
+        "description": "This endpoint is responsible to gel all travels",
+        "parameters": [
+          {
+            "name": "passengerId",
+            "in": "query",
+            "description": "The passenger ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "driverId",
+            "in": "query",
+            "description": "The driver ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "POST travel",
+        "description": "This endpoint is responsible to create a new travel",
+        "parameters": [
+          {
+            "name": "travel",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "origin": {
+                  "example": "any"
+                },
+                "destination": {
+                  "example": "any"
+                },
+                "travelTime": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "status": {
+                  "example": "any"
+                },
+                "passengersIds": {
+                  "example": "any"
+                },
+                "driverId": {
+                  "example": "any"
+                }
+              }
+            },
+            "description": "Create New travel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "origin": {
+                    "example": "any"
+                  },
+                  "destination": {
+                    "example": "any"
+                  },
+                  "travelTime": {
+                    "example": "any"
+                  },
+                  "type": {
+                    "example": "any"
+                  },
+                  "status": {
+                    "example": "any"
+                  },
+                  "passengersIds": {
+                    "example": "any"
+                  },
+                  "driverId": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "autoBody": true
+      }
     }
   }
 }
